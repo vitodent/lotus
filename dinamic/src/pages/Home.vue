@@ -5,7 +5,4 @@
 <script setup>
 </script>
 <style>
-    body{
-        background-color: rgb(11, 11, 12);
-    }
 </style>

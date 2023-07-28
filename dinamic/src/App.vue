@@ -12,6 +12,10 @@ import { RouterLink, RouterView } from 'vue-router'
         <li><a class="menu-item" href="#"><router-link to="/view/manga">Manga</router-link></a></li>
       </ul>
     </nav>
+    <div class="search-box">
+    <button class="btn-search"><img class="search" src="https://icons.veryicon.com/png/o/miscellaneous/prototyping-tool/search-bar-01.png"></button>
+    <input type="text" class="input-search" placeholder="  Type to Search...">
+  </div>
 </header>
   <br>
   <RouterView />
@@ -22,6 +26,8 @@ import { RouterLink, RouterView } from 'vue-router'
 body {
   font-family: 'Nunito', sans-serif;
   color: aliceblue;
+  margin:10px;
+  background-color: #55505C;
 }
 a {
   text-decoration: none;
@@ -31,14 +37,14 @@ a:hover {
   color: bisque;
 }
 .header-container {
-  padding: 20px 0;
-  background-color:rgb(22, 22, 22);
+  padding: 10px 0;
+  background-color:#5D737E;
   color: white;
   display: flex;
   align-items: center; 
   margin: auto;
   border-radius: 50px;
-  box-shadow: 10px 10px 130px black;
+  box-shadow: 10px 10px 130px rgb(76, 68, 92);
 }
 
 li {
@@ -63,15 +69,94 @@ ul {
   flex-grow: 1;
 }
 .logo {
-  width: 50px;
+  width: 60px;
   height: auto;
   margin-left: 60px;
+  transition: all .2s ease-in-out;
 }
-img:hover {
-  transform: scale(1.5)
+.logo:hover {
+  transform: scale(1.5);
+  
 }
 .menu-item:hover {
   font-size: 110%;
   border: 2px solid transparent;
+  
+}
+.search-box{
+  width: fit-content;
+  height: fit-content;
+}
+.input-search{
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+  background-color: #22A6B3;
+  padding-right: 40px;
+  color:#fff;
+  margin-right: 60px; 
+}
+.input-search::placeholder{
+  color:rgba(255,255,255,.5);
+  font-size: 18px;
+  letter-spacing: 3px;
+  font-weight: 100;
+
+}
+.btn-search{
+  width: 50px;
+  height: 50px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  color:#ffffff ;
+  background-color:transparent;
+  pointer-events: painted;
+  margin-left: 60px;
+}
+.btn-search:focus ~ .input-search{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+}
+.input-search:focus{
+  margin-left: 90px;
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+button {
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+  transition: transform .7s ease-in-out;
+  margin-left:10px;
+  margin-right: 300px;
+}
+button:hover {
+   transform: rotate(360deg);
+}
+.search {
+  width: 30px;
+ height: auto;
+ margin-right: 60px;
+ margin-inline-end: auto;
+}
+h1 {
+  margin: 20px;
 }
 </style>
