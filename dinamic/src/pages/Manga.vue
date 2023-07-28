@@ -1,2 +1,5 @@
-<template><h1>Manga</h1></template>
+<template>
+<h1>Manga</h1>
+</template>
 <script></script>
+<style></style>

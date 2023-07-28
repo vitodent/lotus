@@ -1,2 +1,4 @@
-<template><h1>Anime</h1></template>
+<template>
+<h1>Anime</h1>
+</template>
 <script></script>
