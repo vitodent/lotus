@@ -18,14 +18,16 @@ const router = createRouter({
       component: Movie
     },
     {
-      path: '/view/anime',
+      path: '/view/anime/:animeid',
       name: 'Anime',
-      component: Anime
+      component: Anime,
+      props: true,
     },
     {
-      path: '/view/manga',
+      path: '/view/manga/:mangaid',
       name: 'Manga',
-      component: Manga
+      component: Manga,
+      props:true
     },
 
   ]

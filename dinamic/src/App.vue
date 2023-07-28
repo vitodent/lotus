@@ -15,5 +15,6 @@ import { RouterLink, RouterView } from 'vue-router'
 body {
   font-family: 'Nunito', sans-serif;
   color: aliceblue;
+  cursor: pointer;
 }
 </style>
