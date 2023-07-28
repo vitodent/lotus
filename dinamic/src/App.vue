@@ -1,5 +1,43 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+// import { getDatabase } from "firebase/database";
+// const database = getDatabase();
+
+
+
+
+
+// import { getDatabase, ref, push, set } from "firebase/database";
+
+// // Create a new post reference with an auto-generated id
+// const db = getDatabase();
+// const postListRef = ref(db, 'posts');
+// const newPostRef = push(postListRef);
+// set(newPostRef, {
+//     // ...
+// });
+
+
+
+
+
+// import { getDatabase, ref, onChildAdded, onChildChanged, onChildRemoved } from "firebase/database";
+
+// const db = getDatabase();
+// const commentsRef = ref(db, 'post-comments/' + postId);
+// onChildAdded(commentsRef, (data) => {
+//   addCommentElement(postElement, data.key, data.val().text, data.val().author);
+// });
+
+// onChildChanged(commentsRef, (data) => {
+//   setCommentValues(postElement, data.key, data.val().text, data.val().author);
+// });
+
+// onChildRemoved(commentsRef, (data) => {
+//   deleteComment(postElement, data.key);
+// });
+
+
 </script>
 
 <template>
