@@ -6,6 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <router-link to="/view/movie">Filme</router-link>
   <router-link to="/view/anime">Anime</router-link>
   <router-link to="/view/manga">Manga</router-link>
+  <br>
 
   <RouterView />
 </template>
