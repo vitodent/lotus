@@ -3,8 +3,8 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <router-link to="/home/category">Category</router-link>
-  <router-link to="/view/movieId">MoveID</router-link>
+  <router-link to="/home/category">Filme</router-link>
+
   <RouterView />
 </template>
 
