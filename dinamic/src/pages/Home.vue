@@ -1,17 +1,11 @@
 <template>
-    <h1>Home Page - {{ route.params.category }}</h1>
+    <h1>Home Page - </h1>
+    <router-link to="/view/movieId">MoveID</router-link>
 </template>
-<script>
-import { useRoute } from 'vue-router'
-const route = useRoute()
-export default {
-    components: {
-        route
-    }
-}
-
-
-
-console.log(route.params)
+<script setup>
 </script>
-<style></style>
+<style>
+    body{
+        background-color: rgb(21, 20, 23);
+    }
+</style>
