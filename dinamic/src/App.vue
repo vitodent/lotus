@@ -67,6 +67,9 @@ ul {
   height: auto;
   margin-left: 60px;
 }
+img:hover {
+  transform: scale(1.5)
+}
 .menu-item:hover {
   font-size: 110%;
   border: 2px solid transparent;
