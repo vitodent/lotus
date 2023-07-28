@@ -1,6 +1,6 @@
 <template>
     <h1>Home Page - </h1>
-    <router-link to="/view/movieId">MoveID</router-link>
+    <!-- <router-link to="/view/movieId">MoveID</router-link> -->
 </template>
 <script setup>
 </script>
