@@ -18,7 +18,7 @@
               <p>Frontend Static</p>
           </li>
           <li>
-              <img  src="images/IMG_3r.jpg" /> 
+              <img  src="images/IMG_3.jpg" /> 
               <br>
               <a id="insta" href="https://www.instagram.com/_regyna._/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">
                   @_regyna._

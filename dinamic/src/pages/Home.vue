@@ -1,42 +1,65 @@
 <template>
   <h1>Home {{ route.params.category }}</h1>
   <!-- <router-link to="/view/movieId">MoveID</router-link> -->
+
+  <div id="images">
+    <section class="images">
+      <ul>
+        <div v-for="movie in movies" :key="movie.id">
+          <a href="#"><img :src="movie.preview" alt="1" /></a>
+          <h3>{{ movie.title }}</h3>
+          <h3> {{ movie.rating }}</h3>
+        </div>
+      </ul>
+    </section>
+  </div>
 </template>
 
 
 <script setup>
-import {ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-
-const route = useRoute()
-const items = ref([])
-
-
-import { collection, getDocs } from "firebase/firestore";
+import { ref, onMounted, watch } from 'vue';
+import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore';
+import { useRoute } from 'vue-router';
 import { db } from "../firebase";
 
-watch(route, async () => {
-  try {
-    const querySnapshot = await getDocs(collection(db, route.params.category));
+const CollRef = collection(db, 'Movies');
+const movies = ref([]);
+const route = useRoute();
 
+// Define a function to fetch data from Firestore
+const fetchData = async (type) => {
+  const OrderedCollRef = query(CollRef, where('type', '==', type));
+  const querySnapshot = await getDocs(OrderedCollRef);
+  const mov = [];
+  querySnapshot.forEach((doc) => {
+    const todo = {
+      id: doc.id,
+      title: doc.data().title,
+      rating: doc.data().rating,
+      preview: doc.data().preview,
+    };
+    mov.push(todo);
+  });
+  movies.value = mov;
+};
 
-    const result = querySnapshot.map((doc) => {
-      return {
-        id: doc.id,
-        img: doc.data().preview,
-        title: doc.data().title,
-        rating: doc.data().rating,
-      }
-    });
+// Use watch to trigger the fetch function when the 'type' parameter changes
+watch(() => {
+  return route.params.type; // Watch the 'type' parameter in the URL
+}, async (newValue) => {
+  // This function will be called when the 'type' parameter changes
+  await fetchData(newValue);
+});
 
-    items.value = result
+// Call the fetch function when the component is mounted
+onMounted(async () => {
+  // Extract the 'type' parameter from the URL after '/home/'
+  const typeFromURL = route.path.split('/home/')[1];
+  // Default to 'anime' if the 'type' parameter is not present in the URL
+  const type = typeFromURL || 'anime';
+  await fetchData(type);
+});
 
-    console.log("Fetched data:", this.animes);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-
-})
 </script>
 
 
