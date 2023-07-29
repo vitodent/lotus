@@ -52,6 +52,7 @@ h1 {
   text-align: center;
 }
 .images  {
+border: 3px white;
 display: flex;
 justify-content: center;
 column-gap: 32px;

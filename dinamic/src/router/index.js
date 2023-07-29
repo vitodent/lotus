@@ -8,30 +8,10 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/home',
+      path: '/home/:category',
       name: 'home',
       component: Home
     },
-    {
-      path: '/view/movie',
-      name: 'Movie',
-      component: Movie
-    },
-    {
-      path: '/view/anime',
-      name: 'Anime',
-      component: Anime
-    },
-    {
-      path: '/view/manga',
-      name: 'Manga',
-      component: Manga
-    },
-    // {
-    //   path: '/view/:animeid',
-    //   name: 'AnimeTitle',
-    //   component: SingleTitle,
-    // }
   ]
 })
 export default router
