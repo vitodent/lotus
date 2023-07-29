@@ -27,7 +27,11 @@ const router = createRouter({
       name: 'Manga',
       component: Manga
     },
-
+    // {
+    //   path: '/view/:animeid',
+    //   name: 'AnimeTitle',
+    //   component: SingleTitle,
+    // }
   ]
 })
 export default router
