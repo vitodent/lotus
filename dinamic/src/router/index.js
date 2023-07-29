@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
-import Movie from '../pages/Movie.vue'
-import Anime from '../pages/Anime.vue'
-import Manga from '../pages/Manga.vue'
+import SinglePage from '../pages/singlepage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +10,11 @@ const router = createRouter({
       name: 'home',
       component: Home
     },
+    {
+      path: '/watch/:itemId',
+      name: 'watch',
+      component: SinglePage
+    }
   ]
 })
 export default router

@@ -1,5 +1,5 @@
 <template>
-  <header class="header-container">
+  <!-- <header class="header-container">
     <RouterLink to="/home"><img class="logo" src="https://i.ibb.co/N1VDV6D/logo-480.png"></RouterLink>
     <nav class="menu-container">
       <ul>
@@ -19,7 +19,8 @@
         <img class="search" src="https://icons.veryicon.com/png/o/miscellaneous/prototyping-tool/search-bar-01.png" />
       </button>
     </div>
-  </header>
+  </header> -->
+  <Header/>
   <br>
   <RouterView />
   <Footer/>
@@ -39,7 +40,7 @@
   }
   footer {
     position: absolute;
-  }
+  /* }
   a {
     text-decoration: none;
     color: rgb(221, 222, 222);
@@ -154,13 +155,129 @@
   }
   h1 {
   margin: 20px;
-}button:hover {
+}button:hover { */
    transform: rotate(360deg);
 }
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=Inter:wght@300&family=Lugrasimo&family=Notable&family=Nunito+Sans:opsz,wght@6..12,200&family=REM:wght@300&family=Rammetto+One&family=Roboto+Mono:ital,wght@1,500&family=Shrikhand&display=swap');
+body{
+  margin: 0;
+}
+
+.header-container {
+    font-family: 'Lugrasimo', cursive;
+  margin: 0 auto;
+  padding: 20px 0;
+  background-color:rgb(22, 22, 22);
+  cursor: pointer;
+  color: white;
+  /* border-bottom-width: 1px;
+  border-color:#fff; */
+  
+}
+
+#header-container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container img {
+  height: auto;
+  width: 100px;
+}
+
+.menu_container li a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  padding: 80px;
+  text-transform: uppercase;
+}
+
+.menu_container {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  align-items: center;
+}
+h1 {
+    font-family: 'Rammetto One', cursive;
+  text-align: center;
+  text-shadow: 0 0 3px #ff0000;
+  padding-top: 30px;
+  padding-bottom: 25px;
+  color: #0d0d0d; /* Base color for the text */
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #98bdc7, 0 0 70px #8ed7de, 0 0 80px #78f2e6, 0 0 100px #88b9e4; /* Neon glow effect */
+
+}
+
+
+.images {
+  margin-top: center;
+  /* max-width: 960px; */
+
+}
+.images  {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  text-align: center;
+ font-family:  'Nunito Sans', sans-serif;
+ font-size: x-large;
+ font-style: bold;
+ padding: auto;
+ shape-margin: 3px;
+}
+.images h3{
+    color: #fff;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 151px #0fa;
+}
+.images span{
+    color: #fff;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 151px #0fa;
+}
+.images img {
+  align-items: center;
+  height: 500px;
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 20px;
+  width: 400px;
+  padding: 20px;
+  border-radius: 50px;
+}
+ul {
+  list-style-type: none;
+}
+
+html{
+    background: rgb(5, 5, 5);
+}
+
 </style>
 <script setup>
   import Footer from './components/Footer.vue';
   import { RouterLink, RouterView } from 'vue-router';
+  import Header from './components/Header.vue';
 </script>
 
 <script>
