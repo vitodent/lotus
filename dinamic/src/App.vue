@@ -1,25 +1,4 @@
 <template>
-  <!-- <header class="header-container">
-    <RouterLink to="/home"><img class="logo" src="https://i.ibb.co/N1VDV6D/logo-480.png"></RouterLink>
-    <nav class="menu-container">
-      <ul>
-        <li><a class="menu-item" href="#"><router-link to="/view/movie">Movies</router-link></a></li>
-        <li><a class="menu-item" href="#"><router-link to="/view/anime">Anime</router-link></a></li>
-        <li><a class="menu-item" href="#"><router-link to="/view/manga">Manga</router-link></a></li>
-      </ul>
-    </nav>
-    <div class="search-box">
-      <input
-        type="text"
-        class="input-search"
-        :class="{ 'input-expanded': isSearchExpanded }"
-        placeholder="   Type to Search..."
-      />
-      <button class="btn-search" @click="toggleSearch">
-        <img class="search" src="https://icons.veryicon.com/png/o/miscellaneous/prototyping-tool/search-bar-01.png" />
-      </button>
-    </div>
-  </header> -->
   <Header/>
   <br>
   <RouterView />
@@ -274,6 +253,7 @@ html{
 }
 
 </style>
+
 <script setup>
   import Footer from './components/Footer.vue';
   import { RouterLink, RouterView } from 'vue-router';

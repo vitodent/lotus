@@ -6,9 +6,11 @@
     <section class="images">
       <ul>
         <div v-for="movie in movies" :key="movie.id">
-          <a href="#"><img :src="movie.preview" alt="1" /></a>
-          <h3>{{ movie.title }}</h3>
-          <h3> {{ movie.rating }}</h3>
+          <router-link :to="`/watch/${movie.id}`">
+            <a href="#"><img :src="movie.preview" alt="1" /></a>
+            <h3>{{ movie.title }}</h3>
+            <h3> {{ movie.rating }}</h3>
+          </router-link>
         </div>
       </ul>
     </section>
@@ -17,7 +19,7 @@
 
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore';
 import { useRoute } from 'vue-router';
 import { db } from "../firebase";
@@ -43,23 +45,11 @@ const fetchData = async (type) => {
   movies.value = mov;
 };
 
-// Use watch to trigger the fetch function when the 'type' parameter changes
-watch(() => {
-  return route.params.type; // Watch the 'type' parameter in the URL
-}, async (newValue) => {
-  // This function will be called when the 'type' parameter changes
-  await fetchData(newValue);
+watch(route , async (newValue) => {
+  await fetchData(newValue.params.category);
 });
 
-// Call the fetch function when the component is mounted
-onMounted(async () => {
-  // Extract the 'type' parameter from the URL after '/home/'
-  const typeFromURL = route.path.split('/home/')[1];
-  // Default to 'anime' if the 'type' parameter is not present in the URL
-  const type = typeFromURL || 'anime';
-  await fetchData(type);
-});
-
+fetchData(route.params.category)
 </script>
 
 

@@ -53,6 +53,18 @@
 </section>
 </template>
 <script>
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const ids = route.params.itemId
+console.log(ids)
+// id-ul   route.params.itemId
+
+//here
+
+
+
 </script>
 <style>
 
