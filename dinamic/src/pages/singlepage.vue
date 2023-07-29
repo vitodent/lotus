@@ -29,28 +29,6 @@
                 <textarea type="text" id="lname" placeholder="Scrie.." name="lname" value=""></textarea>
                 <input type="button" value="Submit" />
               </form>
-
-            <section>
-        <div>
-     <span>Tania</span>
-      <p>
-        La Casa de Papel este pur și simplu captivant! Intriga palpitantă, personajele complexe și răsturnările de situație te țin cu sufletul la gură de la început până la sfârșitul fiecărui episod. 
-      </p>
-      </div>
-      <div>
-        <span>Miroslav</span>
-      <p>
-        La Casa de Papel este o capodoperă cinematografică! Nu numai că povestea este extrem de captivantă și plină de surprize, dar și prestația actorilor este absolut remarcabilă. Filmul explorează teme precum moralitatea, justiția și libertatea într-un mod subtil și inteligent. Cu siguranță, unul dintre cele mai bune seriale pe care le-am văzut vreodată!
-      </p>
-      </div>
-      <div>
-        <span>Simion</span>
-      <p>
-        La Casa de Papel m-a ținut lipit de ecran de la prima secundă până la ultima. Povestea ingenioasă a jafurilor orchestrată de Profesorul și echipa sa de hoți este absolut fascinantă, iar narațiunea inteligentă cu flashback-uri te face să dezvălui încetul cu încetul trecutul și motivele personajelor. Acțiunea și suspansul sunt dozate perfect, iar momentele emoționale au o puternică rezonanță. Este o experiență cinematografică de neuitat, care merită toate laudele pe care le primește!
-      </p>
-      </div>
-    <!-- aici trebuie sa fie mai multe comentarii -->
-</section>
 </template>
 <script>
 import { useRoute } from 'vue-router'
