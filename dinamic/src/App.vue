@@ -22,7 +22,7 @@
   </header>
   <br>
   <RouterView />
-
+  <Footer/>
 </template>
 
 <style>
@@ -153,12 +153,24 @@
 }
 </style>
 <script setup>
+  import Footer from './components/Footer.vue';
   import { RouterLink, RouterView } from 'vue-router';
-  import { ref } from 'vue';
+</script>
 
-  const isSearchExpanded = ref(false);
-
-  function toggleSearch() {
-    isSearchExpanded.value = !isSearchExpanded.value;
+<script>
+  export default {
+    data: function(){
+      return{
+        isSearchExpanded: false
+      }
+    },
+    components: {
+      Footer
+    },
+    methods:{
+      toggleSearch: function(){
+        this.isSearchExpanded = !this.isSearchExpanded;
+      }
+    }
   }
 </script>

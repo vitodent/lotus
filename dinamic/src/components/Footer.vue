@@ -1,31 +1,56 @@
 <template>
     <section id="partners">
-    <img class="profile-picture" src="images/IMG_1t.jpg" />
-          <div class="profile-info">
-            <a id="insta" href="https://www.instagram.com/tatiannabuzila.18/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">@tatiannabuzila.19</a>
-            <p class="role">Frontend Static</p>
-          </div>
-
-    <img class="profile-picture" src="images/IMG_1t.jpg" />
-          <div class="profile-info">
-            <a id="insta" href="https://www.instagram.com/arashiviv/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">@arashiviv</a>
-    </div>
-    <img class="profile-picture" src="images/IMG_1t.jpg" />
-          <div class="profile-info">
-            <a id="insta" href="https://www.instagram.com/_regyna._/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">@_regyna._</a>
-            <p class="role">Frontend Dinamic</p>
-          </div>
-        <img class="profile-picture" src="images/IMG_1t.jpg" />
-          <div class="profile-info">
-            <a id="insta" href="https://www.instagram.com/userlism/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">@userlism</a>
-            <p class="role">Frontend Dinamic</p>
-          </div>
+      <ul class="contact">
+          <li>
+              <img src="images/IMG_1t.jpg" /> 
+              <br>
+              <a id="insta" href="https://www.instagram.com/tatiannabuzila.18/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">
+                  @tatiannabuzila.19
+                </a>
+              <p id="insta1">Frontend Static</p>
+          </li>
+          <li>
+              <img src="images/IMG_2v.jpg" /> 
+              <br>
+              <a id="insta" href="https://www.instagram.com/arashiviv/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">
+                  @arashiviv
+                </a>
+              <p>Frontend Static</p>
+          </li>
+          <li>
+              <img  src="images/IMG_3r.jpg" /> 
+              <br>
+              <a id="insta" href="https://www.instagram.com/_regyna._/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">
+                  @_regyna._
+                </a>
+              <p>Frontend Dinamic</p>
+          </li>
+          <li>
+              <img src="images/IMG_4d.jpg" /> 
+              <br>
+              <a id="insta" href="https://www.instagram.com/userlism/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">
+              @userlism
+                </a>
+              <p>Frontend Dinamic</p>
+          </li>
+      </ul>
       </section>
 © Lotus 2023 || Designed By: Students of GirlsGoIT
 </template>
 <script>
+export default {
+    name:"Footer"
+}
+
+
 </script>
 <style>
+img {
+    transition: all .2s ease-in-out;
+}
+img:hover {
+    transform: scale(1.1);
+}
 .credit  {
   display: flex;
   justify-content: space-between;
@@ -45,7 +70,7 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  margin: 20px;
+  margin: 10px;
   width: 400px;
   padding: 20px;
   border-radius: 50px;
@@ -56,8 +81,9 @@
   display: flex;
   align-items: center;
   margin: auto;
-  padding: 20px 0;
+  padding: 10px 0;
   border-radius: 50px;
+  justify-content: space-around;
 }
 #partners ul {
   display: flex;
@@ -93,15 +119,6 @@
   align-items: center;
   text-align: center;
   list-style-type: none;
-}
-#partners h4{
-  display: flex;
-  justify-content: space-between;
-  padding-left: 35px;
-  
-}
-
-#partners p{
   display: block;
 }
 .credit img{
