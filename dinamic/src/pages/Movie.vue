@@ -7,20 +7,20 @@
       
       
         <div>
-          <a href="#"><img src="images/4.jpg" alt="1" /></a>
+        <img src="https://i.ibb.co/hZ2J0Tw/4.jpg" >
           <h3 class="font-effect-emboss">Joker </h3>
            <!-- Add icon library -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
         </div>
         <div>
-          <a href="#"><img src="images/5.jpg" alt="1" /> </a>
+            <img src="https://i.ibb.co/hRxQRxB/5.jpg">
             <h3 class="font-effect-emboss"> Price & Prejudice </h3>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             
         </div>
          <div>
-          <a href="#"><img src="images/6.jpg" alt="1" /></a>
+        <img src="https://i.ibb.co/mcXQMYR/6.jpg">
           <h3 class="font-effect-emboss"> La Casa de Papel </h3>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             
