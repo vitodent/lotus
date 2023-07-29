@@ -15,7 +15,7 @@
     <section class="images">
       <ul>
         <div>
-          <a href="#"><img src="images/1.jpg" alt="1" /></a>
+          <img src="https://i.ibb.co/Z62PTy7/1.jpg"> ><a target='_blank' href='https://dedupelist.com/'>Link Name</a><br />
           <h3 class="font-effect-emboss">Attack On Tittan  </h3>
            <!-- Add icon library -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,16 +24,16 @@
         
         </div>
         <div>
-          <a href="#"><img src="images/3.jpg" alt="1" /> </a>
-            <h3 class="font-effect-emboss"> Your Name </h3>
+         <img src="https://i.ibb.co/bzSkKC1/2.jpg" >
+            <h3 class="font-effect-emboss"> Death Note </h3>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            
+                
               
         </div>
          <div>
-          <a href="#"><img src="images/2.jpg" alt="1" /></a>
-          <h3 class="font-effect-emboss"> Death Note </h3>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <img src="https://i.ibb.co/Xzs82Hv/3.jpg">         
+          <h3 class="font-effect-emboss"> Your Name </h3>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             
            
           </div>
@@ -79,6 +79,9 @@
 }
 ul {
   list-style-type: none;
+}
+text {
+  text-align: center;
 }
 
 </style>
