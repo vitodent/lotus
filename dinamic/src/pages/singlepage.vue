@@ -1,89 +1,193 @@
 <template>
+  <section class="container">
     <section class="section_bg">
-    
-    <iframe
-      src="https://www.youtube.com/embed/_InqQJRqGW4"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
-    
-
-
-    <h1>Honey Heist - 4.3/5</h1>
-    <h2>Anul: 2020</h2>
-
-    <p>
-        La Casa de Papel" este un film spaniol captivant despre un geniu criminal cunoscut ca "Profesorul" care organizează cel mai mare jaf din istorie, în timp ce își conduce echipa de hoți și ostatici într-un joc tensionat cu autoritățile. Suspansul, răsturnările de situație și personajele complexe au făcut din această serie un fenomen global apreciat de publicul din întreaga lume. În timp ce planul jafului se desfășoară, relațiile din cadrul echipei devin din ce în ce mai complicate. Conflictele personale și rivalitățile apar, iar loialitatea fiecărui membru este pusă la încercare. În același timp, liderul Profesorul își urmărește meticulos strategia, încercând să-și controleze echipa din umbră și să evite orice greșeală care ar putea pune în pericol reușita planului.
-    </p>
-    <hr>
-</section>
-
-    
-
-            <form id="comentariu">
-                <label for="fname">Nume:</label><br>
-                <input type="text" id="fname" name="fname" value="" placeholder="Nume"><br>
-                <label for="lname">Comentariu:</label><br>
-                <textarea type="text" id="lname" placeholder="Scrie.." name="lname" value=""></textarea>
-                <input type="button" value="Submit" />
-              </form>
-
-            <section>
-        <div>
-     <span>Tania</span>
-      <p>
-        La Casa de Papel este pur și simplu captivant! Intriga palpitantă, personajele complexe și răsturnările de situație te țin cu sufletul la gură de la început până la sfârșitul fiecărui episod. 
-      </p>
+      <div id="video-container">
+        <iframe
+          :src="movie.trailer"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
       </div>
+
+      <h1>{{ movie.title }} - {{ movie.rating }}/5</h1>
+      <h2>Anul: {{ movie.year }}</h2>
+
+      <p>
+        {{ movie.description }}
+      </p>
+    </section>
+
+    <div id="comentariu">
       <div>
-        <span>Miroslav</span>
-      <p>
-        La Casa de Papel este o capodoperă cinematografică! Nu numai că povestea este extrem de captivantă și plină de surprize, dar și prestația actorilor este absolut remarcabilă. Filmul explorează teme precum moralitatea, justiția și libertatea într-un mod subtil și inteligent. Cu siguranță, unul dintre cele mai bune seriale pe care le-am văzut vreodată!
-      </p>
+        <label for="fname">Nume:</label><br />
+        <input
+          type="text"
+          id="fname"
+          v-model="reviewName"
+          name="fname"
+          placeholder="Nume"
+        />
       </div>
+
       <div>
-        <span>Simion</span>
-      <p>
-        La Casa de Papel m-a ținut lipit de ecran de la prima secundă până la ultima. Povestea ingenioasă a jafurilor orchestrată de Profesorul și echipa sa de hoți este absolut fascinantă, iar narațiunea inteligentă cu flashback-uri te face să dezvălui încetul cu încetul trecutul și motivele personajelor. Acțiunea și suspansul sunt dozate perfect, iar momentele emoționale au o puternică rezonanță. Este o experiență cinematografică de neuitat, care merită toate laudele pe care le primește!
-      </p>
+        <label for="lname">Comentariu:</label><br />
+        <textarea
+          id="lname"
+          v-model="reviewMessage"
+          placeholder="Scrie.."
+          name="lname"
+        ></textarea>
       </div>
-    <!-- aici trebuie sa fie mai multe comentarii -->
-</section>
+
+      <button class="submit-btn" v-on:click="leaveReviewHandler">
+        Lasa review
+      </button>
+    </div>
+
+    <section class="reviews">
+      <div v-for="review in reviews">
+        <span>{{ review.reviewName }}</span>
+        <p>
+          {{ review.reviewText }}
+        </p>
+      </div>
+    </section>
+  </section>
 </template>
-<script>
-import { useRoute } from 'vue-router'
 
-const route = useRoute()
+<script setup>
+import { ref } from "vue";
+import { useRoute } from "vue-router";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  collection,
+  where,
+  query,
+  addDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
 
-const ids = route.params.itemId
-console.log(ids)
-// id-ul   route.params.itemId
+const route = useRoute();
+const movie = ref([]);
+const reviews = ref([]);
 
-//here
+const reviewName = ref("");
+const reviewMessage = ref("");
 
+const getDocumentHandler = async (itemId) => {
+  const docRef = doc(db, "Movies", itemId);
+  const docSnap = await getDoc(docRef);
 
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    console.log("data", data);
+    movie.value = {
+      title: data.title,
+      rating: data.rating,
+      trailer: data.trailerlink,
+      description: data.description,
+      year: data.year,
+    };
+  } else {
+  }
+};
+getDocumentHandler(route.params.itemId);
 
+const updDocumentHandler = async (itemId) => {
+  const ratingRef = doc(db, "Movies", itemId);
+
+  await updateDoc(ratingRef, {
+    rating: 100,
+  });
+};
+updDocumentHandler(route.params.itemId);
+
+async function getReviews(itemId) {
+  try {
+    const CollRef = collection(db, "review");
+    const OrderedCollRef = query(CollRef, where("movieId", "==", itemId));
+    const querySnapshot = await getDocs(OrderedCollRef);
+
+    const data = [];
+
+    querySnapshot.forEach((doc) => {
+      data.push({
+        reviewText: doc.data().reviewText,
+        reviewName: doc.data().reviewName,
+      });
+
+      reviews.value = data;
+    });
+  } catch (error) {
+    console.log("error", error);
+    console.error("Error while querying landmarks:", error);
+  }
+}
+getReviews(route.params.itemId);
+
+async function addReviews(body) {
+  const docRef = await addDoc(collection(db, "review"), body);
+}
+
+const leaveReviewHandler = async () => {
+  const reviewBody = {
+    reviewName: reviewName.value,
+    reviewText: reviewMessage.value,
+    movieId: route.params.itemId,
+  };
+
+  reviews.value.push(reviewBody)
+
+  await addReviews(reviewBody);
+
+  reviewName.value = "";
+  reviewMessage.value = "";
+};
 </script>
-<style>
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,800;1,900;1,1000&display=swap');
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,800;1,900;1,1000&display=swap");
 
-body{
+body {
   margin: 50px;
 }
 
+.submit-btn {
+  padding: 16px 24px;
+  width: auto;
+  margin: auto;
+}
+
+#comentariu {
+  margin: 32px 0px;
+}
+
+#video-container {
+  max-width: 960px;
+  margin: auto;
+}
+
+.reviews {
+  margin-bottom: 50px;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+}
+
 .header-container {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   margin: 0 auto;
   padding: 20px 0;
-  background-color:rgb(22, 22, 22);
+  background-color: rgb(22, 22, 22);
   cursor: pointer;
   color: white;
-  /* border-bottom-width: 1px;
-  border-color:#fff; */
-  
 }
 
 #header-container {
@@ -112,37 +216,34 @@ body{
   list-style-type: none;
   align-items: center;
 }
+
 h1 {
   text-align: center;
   text-shadow: 0 0 3px #ff0000;
   padding-top: 30px;
   padding-bottom: 25px;
-
-
 }
-
 
 .images {
   margin-top: center;
   /* max-width: 960px; */
-
 }
-.images  {
+.images {
   display: flex;
   justify-content: space-between;
   align-items: left;
   text-align: center;
- font-family:  'Nunito Sans', sans-serif;
- font-size: x-large;
- font-style: bold;
- padding: auto;
- shape-margin: 3px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: x-large;
+  font-style: bold;
+  padding: auto;
+  shape-margin: 3px;
 }
-.images h3{
-    color: #fff;
+.images h3 {
+  color: #fff;
 }
-.images span{
-    color: #fff;
+.images span {
+  color: #fff;
 }
 .images img {
   align-items: center;
@@ -160,14 +261,16 @@ ul {
   list-style-type: none;
 }
 
-html{
-  background: rgb(47,40,40);
-  background: radial-gradient(circle, rgba(47,40,40,1) 0%, rgba(38,34,30,1) 100%);
-
+html {
+  background: rgb(47, 40, 40);
+  background: radial-gradient(
+    circle,
+    rgba(47, 40, 40, 1) 0%,
+    rgba(38, 34, 30, 1) 100%
+  );
 }
 
-
-#partners{
+#partners {
   max-width: 960px;
   margin: auto;
 }
@@ -183,18 +286,17 @@ html{
   height: auto;
 }
 
-.section_bg{
+.section_bg {
   color: white;
   align-items: center;
-  ;
 }
 
-.section_bg h1{
+.section_bg h1 {
   text-align: center;
   color: white;
-} 
+}
 
-.section_bg p{
+.section_bg p {
   text-align: center;
 }
 
@@ -224,9 +326,10 @@ p {
 
 iframe {
   aspect-ratio: 16/9;
-  width: 100%;
+  width: 960px;
+  margin: auto;
+  height: auto;
 }
-
 
 form {
   margin-top: 20px;
@@ -238,6 +341,7 @@ form {
 input[type="text"],
 textarea {
   margin-bottom: 10px;
+  width: 100% !important;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -250,12 +354,6 @@ section:nth-child(2) {
 }
 
 /* Style the comment div */
-div {
-  border: 1.5px solid #5c5252;
-  padding: 10px;
-  border-radius: 4px;
-}
-
 div p {
   margin-bottom: 10px;
 }
@@ -265,13 +363,12 @@ span {
   color: #c7961c;
 }
 
-#partners{
+#partners {
   border-radius: 25px;
   max-width: 960px;
   margin: auto;
   display: grid;
   border: rounded;
- 
 }
 
 #partners ul {
@@ -282,7 +379,7 @@ span {
   margin: 10px;
 }
 
-#partners img{
+#partners img {
   width: 130px;
   height: 130px;
   border-radius: 200px;
@@ -300,18 +397,17 @@ span {
   text-align: center;
   list-style-type: none;
 }
-#partners h4{
+#partners h4 {
   display: flex;
   justify-content: space-between;
   padding-left: 35px;
-  
 }
 
-#partners p{
+#partners p {
   display: block;
 }
 
-img{
+img {
   object-fit: cover;
 }
 
@@ -319,7 +415,6 @@ img{
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .contact li {
@@ -327,67 +422,65 @@ img{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
-  }
-  
-  .contact {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 100%;
-  }
-  #insta{
-    color: white;
-  }
-  
-  
-  ul{
-      padding: 0;
-  }
+}
 
-  .footer{
-    padding:30px 0px;
-    font-family: 'Nunito', sans-serif;
-    text-align:center;
-    }
-    
-    .footer .row{
-    width:100%;
-    margin:1% 0%;
-    padding:0.6% 0%;
-    color:#fff;
-    font-size:0.8em;
-    }
-    
-    .footer .row a{
-    text-decoration:none;
-    color:gray;
-    transition:0.5s;
-    }
-    
-    .footer .row a:hover{
-    color:#fff;
-    }
-    
-    .footer .row ul{
-    width:100%;
-    }
-    
-    .footer .row ul li{
-    display:inline-block;
-    margin:0px 30px;
-    }
-    
-    .footer .row a i{
-    font-size:2em;
-    margin:0% 1%;
-    }
-    
-    input {
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      padding: 22px;
-      width: auto;
-    }
+.contact {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+#insta {
+  color: white;
+}
+
+ul {
+  padding: 0;
+}
+
+.footer {
+  padding: 30px 0px;
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+}
+
+.footer .row {
+  width: 100%;
+  margin: 1% 0%;
+  padding: 0.6% 0%;
+  color: #fff;
+  font-size: 0.8em;
+}
+
+.footer .row a {
+  text-decoration: none;
+  color: gray;
+  transition: 0.5s;
+}
+
+.footer .row a:hover {
+  color: #fff;
+}
+
+.footer .row ul {
+  width: 100%;
+}
+
+.footer .row ul li {
+  display: inline-block;
+  margin: 0px 30px;
+}
+
+.footer .row a i {
+  font-size: 2em;
+  margin: 0% 1%;
+}
+
+input {
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 22px;
+  width: auto;
+}
 </style>
