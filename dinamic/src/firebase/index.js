@@ -1,6 +1,5 @@
 
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -15,10 +14,16 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
-const db=getFirestore(app)
+const db = getFirestore(app)
 
 export {
     db
 }
+
+// export const getReviews = function(){
+// }
+// const querySnapshot = await getDocs(collection(db, "review"));
+// querySnapshot.forEach((doc) => {
+//   console.log(doc.id, " => ", doc.data());
+// });

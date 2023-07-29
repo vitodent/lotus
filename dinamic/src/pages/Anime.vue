@@ -1,81 +1,74 @@
 <template>
-<h1>Anime</h1>
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lotus</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
   <body>
-
-
-    <h1 class="font-effect-emboss">Alege ce vrei sa urmaresti</h1>
-     <div id="images">
+  <div id="images">
+   <h1>Anime | Reviews</h1>
     <section class="images">
       <ul>
-        <div>
-          <a href="#"><img src="images/1.jpg" alt="1" /></a>
-          <h3 class="font-effect-emboss">Attack On Tittan  </h3>
-           <!-- Add icon library -->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            
-        
-        
+        <div v-for="anime in animes" :key="anime.id">
+          <a href="#"><img :src="anime.img" alt="1" /></a>
+          <h3>{{ anime.title }}</h3>
+          <h3> {{ anime.rating }}</h3>
         </div>
-        <div>
-          <a href="#"><img src="images/3.jpg" alt="1" /> </a>
-            <h3 class="font-effect-emboss"> Your Name </h3>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            
-              
-        </div>
-         <div>
-          <a href="#"><img src="images/2.jpg" alt="1" /></a>
-          <h3 class="font-effect-emboss"> Death Note </h3>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            
-           
-          </div>
       </ul>
     </section>
-    </div>
+  </div>
   </body>
-  <footer class="hi">
-
-  </footer>
 </template>
 <script>
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+
+export default {
+  data() {
+    return {
+      animes: [], 
+    };
+  },
+  async mounted() {
+    try {
+      const querySnapshot = await getDocs(collection(db, "anime"));
+      querySnapshot.forEach((doc) => {
+        this.animes.push({
+          id: doc.id, // Include the document ID as well if you need it later
+          img: doc.data().preview,
+          title: doc.data().title,
+          rating: doc.data().rating,
+        });
+      });
+      console.log("Fetched data:", this.animes);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  },
+};
+
 
 </script>
 <style>
-
-.images {
-  margin-top: center;
-  /* max-width: 960px; */
-
+h3 {
+  font-size: 30px;}
+h1 {
+  font-size: 50px;
+  text-align: center;
 }
 .images  {
-  display: flex;
-  justify-content: space-between;
-  align-items: left;
-  text-align: center;
- font-family:  'Nunito Sans', sans-serif;
- font-size: x-large;
- font-style: bold;
- padding: auto;
- shape-margin: 3px;}
+display: flex;
+justify-content: center;
+column-gap: 32px;
+text-align: center;
+font-family:  'Nunito Sans', sans-serif;
+shape-margin: 3px;}
 .images img {
-  align-items: center;
-  height: 500px;
-  display: block;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  margin: 20px;
-  width: 400px;
-  padding: 20px;
-  border-radius: 50px;
+align-items: center;
+height: 500px;
+display: block;
+position: relative;
+margin-left: auto;
+margin-right: auto;
+margin: 20px;
+width: 400px;
+padding: 20px;
+border-radius: 50px;
 }
 ul {
   list-style-type: none;
