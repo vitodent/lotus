@@ -21,16 +21,15 @@
 
     
         <section>
-            <form id="comentariu">
+            <form id="comentariu">4
                 <label for="fname">Nume:</label><br>
                 <input type="text" id="fname" name="fname" value="" placeholder="Nume"><br>
                 <label for="lname">Comentariu:</label><br>
                 <textarea type="text" id="lname" placeholder="Scrie.." name="lname" value=""></textarea>
                 <input type="button" value="Submit" />
               </form>
-
         </section>
-        
+
         <div>
      <span>Tania</span>
       <p>
